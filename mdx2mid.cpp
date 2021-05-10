@@ -77,6 +77,10 @@ void ProcessCMD(int index, uint_fast8_t CMD, uint_fast8_t ARG1, uint_fast8_t ARG
         midifile.addTempo(track, starttick, ARG1);
         if (DEBUG_SEE) { cout << white << "Tempo Change: " << int(ARG1); }
     }
+    else if (CMD == 0xF3 && !wasPlayingNote)
+    {
+        if (DEBUG_SEE) { cout << white << "ext already taken care of"; }
+    }
     else if (CMD <= 96) {
         wasPlayingNote = true;
         int duration = int(double(ARG1) * divlen);
