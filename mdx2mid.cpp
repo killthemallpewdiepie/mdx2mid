@@ -184,7 +184,12 @@ BYTES = BY2 + (BY1 << 8); }
 
 //Main
 int main() {
-    cout << white << "MDX Name/Path: ";
+    cout << white << R"(mdx2mid v0.1 (https://github.com/johnfortnitekennedyG/mdx2mid)
+
+Convert mdx to midi, based off the original unMDX (https://github.com/metalgeardev/MGS1/blob/master/unMDX.rb)
+Write the filename/path and hit enter.
+
+MDX file: )";
     string name;
     cin >> name;
     string path = name;
