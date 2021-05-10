@@ -1,0 +1,13 @@
+.vs
+*.exe
+*.pch
+*.ipch
+*.log
+*.db
+*.opendb
+*.db-wal
+*.db-shm
+Debug
+x64
+*.filters
+*.user
