@@ -31,6 +31,7 @@ using namespace smf;
 #define DEFAULT_DIVLEN 5.0
 #define DIVLEN_MULT (256.0 / DEFAULT_DIVLEN)
 bool DEBUG_SEE = true;
+bool didPlayNoteYet = false;
 double divlen = DEFAULT_DIVLEN;
 int starttick = 0;
 int track = 0;
@@ -70,37 +71,48 @@ void ProcessCMD(int index, uint_fast8_t CMD, uint_fast8_t ARG1, uint_fast8_t ARG
         midifile.addTempo(track, starttick, ARG1);
         if (DEBUG_SEE) { cout << white << "Tempo Change: " << int(ARG1); }
     }
-    else if (CMD == 0xF3)
-    {
-        if (DEBUG_SEE) { cout << white << "ext already taken care of"; }
-    }
      //Silence is a note too, and it supports using F3 for extensions.
-    else if (CMD <= 96 || CMD == 0xF2) {
+    else if (CMD <= 96 || (CMD == 0xF2 || CMD == 0xF3)) {
         int duration = int(double(ARG1) * divlen);
-        //Scan for note extension commands
-        if (DEBUG_SEE) { cout << lua_color << "Scanning for ext.. "; }
-        while (true) {
-            index += 4;
-            uint_fast8_t C_CHECK = uint_fast8_t(datamdx[index + 3][channel]);
-            if (DEBUG_SEE) { cout << hex << int(C_CHECK) << " " << dec; }
-            //if it's a new note command, or silence, or stop then don't
-            if ((C_CHECK <= 96 || C_CHECK == 0xEE) || (C_CHECK == 0xF2 || C_CHECK == 0xFF)) { break; }
-            //continue to scan
-            if (C_CHECK == 0xF3) {
-                int exten = int(double(uint_fast8_t(datamdx[index + 2][channel])) * divlen);
-                duration += exten;
-                if (DEBUG_SEE) { cout << blue << "EXT +" << exten << lua_color << " "; }
-            }
-        }
-        if (CMD != 0xF2)
+        if (CMD == 0xF3)
         {
-            if (DEBUG_SEE) { cout << purple << notesD[CMD % 12] << "-" << int(CMD / 12) << " - " << int(ARG1) << " (" << duration << ")" << " V: " << int(ARG3) << white; }
-            midifile.addNoteOn(track, starttick, channel, CMD, min(127, int(ARG3) * 3));
-            midifile.addNoteOff(track, starttick + duration, channel, CMD);
+            if (!didPlayNoteYet)
+            {
+                if (DEBUG_SEE) { cout << white << "F3 being used as silence in start: " << duration; }
+            }
+            else
+            {
+                if (DEBUG_SEE) { cout << white << "EXT already taken care of"; }
+            }
         }
         else
         {
-            if (DEBUG_SEE) { cout << white << "Silence: " << duration; }
+            didPlayNoteYet = true;
+            //Scan for note extension commands
+            if (DEBUG_SEE) { cout << lua_color << "Scanning for ext.. "; }
+            while (true) {
+                index += 4;
+                uint_fast8_t C_CHECK = uint_fast8_t(datamdx[index + 3][channel]);
+                if (DEBUG_SEE) { cout << hex << int(C_CHECK) << " " << dec; }
+                //if it's a new note command, or silence, or stop then don't
+                if ((C_CHECK <= 96 || C_CHECK == 0xEE) || (C_CHECK == 0xF2 || C_CHECK == 0xFF)) { break; }
+                //continue to scan
+                if (C_CHECK == 0xF3) {
+                    int exten = int(double(uint_fast8_t(datamdx[index + 2][channel])) * divlen);
+                    duration += exten;
+                    if (DEBUG_SEE) { cout << blue << "EXT +" << exten << lua_color << " "; }
+                }
+            }
+            if (CMD != 0xF2)
+            {
+                if (DEBUG_SEE) { cout << purple << notesD[CMD % 12] << "-" << int(CMD / 12) << " - " << int(ARG1) << " (" << duration << ")" << " V: " << int(ARG3) << white; }
+                midifile.addNoteOn(track, starttick, channel, CMD, min(127, int(ARG3) * 3));
+                midifile.addNoteOff(track, starttick + duration, channel, CMD);
+            }
+            else
+            {
+                if (DEBUG_SEE) { cout << white << "Silence: " << duration; }
+            }
         }
         starttick += duration;
     }
@@ -114,6 +126,7 @@ void ProcessCMD(int index, uint_fast8_t CMD, uint_fast8_t ARG1, uint_fast8_t ARG
 #define printArgs yellow << hex << "C: " << int(CMD) << " A: " << int(ARG1) << "-" << int(ARG2) << "-" << int(ARG3) << dec << white << " "
 
 void ProcessLoop(int index, int stopIndex = 0) {
+    didPlayNoteYet = false;
     int loopStart = 0;
     int loopEnd = 0;
     int loopCmdCall = 0;
