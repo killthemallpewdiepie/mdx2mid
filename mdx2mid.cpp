@@ -79,6 +79,7 @@ void ProcessCMD(int index, uint_fast8_t CMD, uint_fast8_t ARG1, uint_fast8_t ARG
             if (!didPlayNoteYet)
             {
                 if (DEBUG_SEE) { cout << white << "F3 being used as silence in start: " << duration; }
+                starttick += duration;
             }
             else
             {
@@ -113,8 +114,8 @@ void ProcessCMD(int index, uint_fast8_t CMD, uint_fast8_t ARG1, uint_fast8_t ARG
             {
                 if (DEBUG_SEE) { cout << white << "Silence: " << duration; }
             }
+            starttick += duration;
         }
-        starttick += duration;
     }
     else {
         fails++;
