@@ -285,6 +285,6 @@ MDX file: )";
     {
         cout << red << "File " << name << " not found." << white << endl;
     }
-    cout << white << "Exportation complete. Total MDX commands succesfully processed: " << (cmds_processed - fails) << "/" << cmds_processed << " (" << dec << int((double(cmds_processed - fails) / double(cmds_processed)) * 100.0) << "%)" << endl;
+    cout << white << dec << "Exportation complete. Total MDX commands succesfully processed: " << (cmds_processed - fails) << "/" << cmds_processed << " (" << int((double(cmds_processed - fails) / double(cmds_processed)) * 100.0) << "%)" << endl;
     return 0;
 }
