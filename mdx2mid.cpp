@@ -30,21 +30,37 @@ using namespace smf;
 
 #define DEFAULT_DIVLEN 5.0
 #define DIVLEN_MULT (256.0 / DEFAULT_DIVLEN)
-bool DEBUG_SEE = false;
+bool DEBUG_SEE = true;
 double divlen = DEFAULT_DIVLEN;
 int starttick = 0;
 int track = 0;
 int channel = 0;
+bool wasPlayingNote = false;
 char datamdx[0x4000][24];
 string notesD[12] = { "C","C#","D","D#","E","F","F#","G","G#","A","A#","B" };
 MidiFile midifile;
 
+//Output - display a number
+string hexShow(int T)
+{
+    stringstream stream;
+    if (T < 16)
+    {
+        stream << "0";
+    }
+    stream << hex << T;
+    return stream.str();
+}
+
 //Process
 void ProcessCMD(int index, uint_fast8_t CMD, uint_fast8_t ARG1, uint_fast8_t ARG2, uint_fast8_t ARG3) {
-    if (CMD == 0xF2)
+    if (CMD == 0xF2 && (CMD == 0xF3 && !wasPlayingNote))
     {
+        if (CMD == 0xF2) {
+            wasPlayingNote = false;
+        }
         int duration = int(double(ARG1) * divlen);
-        if (DEBUG_SEE) { cout << white << "Silence: " << duration; }
+        if (DEBUG_SEE) { cout << white << "Silence" << (CMD == 0xF3 ? " (Using ext)" : "") << ": " << duration; }
         starttick += duration;
     }
     else if (CMD == 0xD6)
@@ -62,6 +78,7 @@ void ProcessCMD(int index, uint_fast8_t CMD, uint_fast8_t ARG1, uint_fast8_t ARG
         if (DEBUG_SEE) { cout << white << "Tempo Change: " << int(ARG1); }
     }
     else if (CMD <= 96) {
+        wasPlayingNote = true;
         int duration = int(double(ARG1) * divlen);
         //Scan for note extension commands
         if (DEBUG_SEE) { cout << lua_color << "Scanning for ext.. "; }
@@ -84,7 +101,7 @@ void ProcessCMD(int index, uint_fast8_t CMD, uint_fast8_t ARG1, uint_fast8_t ARG
         starttick += duration;
     }
     else {
-        if (DEBUG_SEE) { cout << red << "Unknown/Unimplemented command: " << hex << int(CMD) << white << dec; }
+        if (DEBUG_SEE) { cout << red << "Unknown/Unimplemented command: " << hex << hexShow(CMD) << hexShow(ARG1) << hexShow(ARG2) << hexShow(ARG3) << white << dec; }
     }
 }
 
@@ -92,6 +109,7 @@ void ProcessCMD(int index, uint_fast8_t CMD, uint_fast8_t ARG1, uint_fast8_t ARG
 #define printArgs yellow << hex << "C: " << int(CMD) << " A: " << int(ARG1) << "-" << int(ARG2) << "-" << int(ARG3) << dec << white << " "
 
 void ProcessLoop(int index, int stopIndex = 0) {
+    wasPlayingNote = false;
     int loopStart = 0;
     int loopEnd = 0;
     int loopCmdCall = 0;
