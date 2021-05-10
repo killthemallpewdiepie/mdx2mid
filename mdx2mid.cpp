@@ -35,6 +35,8 @@ double divlen = DEFAULT_DIVLEN;
 int starttick = 0;
 int track = 0;
 int channel = 0;
+int fails = 0;
+int cmds_processed = 0;
 bool wasPlayingNote = false;
 char datamdx[0x4000][24];
 string notesD[12] = { "C","C#","D","D#","E","F","F#","G","G#","A","A#","B" };
@@ -54,6 +56,7 @@ string hexShow(int T)
 
 //Process
 void ProcessCMD(int index, uint_fast8_t CMD, uint_fast8_t ARG1, uint_fast8_t ARG2, uint_fast8_t ARG3) {
+    cmds_processed++;
     if (CMD == 0xF2 || (CMD == 0xF3 && !wasPlayingNote))
     {
         if (CMD == 0xF2) {
@@ -77,7 +80,7 @@ void ProcessCMD(int index, uint_fast8_t CMD, uint_fast8_t ARG1, uint_fast8_t ARG
         midifile.addTempo(track, starttick, ARG1);
         if (DEBUG_SEE) { cout << white << "Tempo Change: " << int(ARG1); }
     }
-    else if (CMD == 0xF3 && !wasPlayingNote)
+    else if (CMD == 0xF3)
     {
         if (DEBUG_SEE) { cout << white << "ext already taken care of"; }
     }
@@ -105,6 +108,7 @@ void ProcessCMD(int index, uint_fast8_t CMD, uint_fast8_t ARG1, uint_fast8_t ARG
         starttick += duration;
     }
     else {
+        fails++;
         if (DEBUG_SEE) { cout << red << "Unknown/Unimplemented command: " << hex << hexShow(CMD) << hexShow(ARG1) << hexShow(ARG2) << hexShow(ARG3) << white << dec; }
     }
 }
@@ -281,5 +285,6 @@ MDX file: )";
     {
         cout << red << "File " << name << " not found." << white << endl;
     }
+    cout << white << "Exportation complete. Total MDX commands succesfully processed: " << (cmds_processed - fails) << "/" << cmds_processed << " (" << dec << int((double(cmds_processed - fails) / double(cmds_processed)) * 100.0) << "%)" << endl;
     return 0;
 }
