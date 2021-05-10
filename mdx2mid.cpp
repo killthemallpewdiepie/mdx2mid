@@ -54,7 +54,7 @@ string hexShow(int T)
 
 //Process
 void ProcessCMD(int index, uint_fast8_t CMD, uint_fast8_t ARG1, uint_fast8_t ARG2, uint_fast8_t ARG3) {
-    if (CMD == 0xF2 && (CMD == 0xF3 && !wasPlayingNote))
+    if (CMD == 0xF2 || (CMD == 0xF3 && !wasPlayingNote))
     {
         if (CMD == 0xF2) {
             wasPlayingNote = false;
