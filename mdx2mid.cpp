@@ -54,7 +54,6 @@ void ProcessCMD(int index, uint_fast8_t CMD, uint_fast8_t ARG1, uint_fast8_t ARG
     }
     else if (CMD == 0xD2 || CMD == 0xD5)
     {
-        //midifile.addPatchChange(track, starttick, channel, ARG1);
         if (DEBUG_SEE) { cout << white << "Bank/Instrument Change: " << int(ARG1); }
     }
     else if (CMD == 0xD0)
@@ -68,19 +67,19 @@ void ProcessCMD(int index, uint_fast8_t CMD, uint_fast8_t ARG1, uint_fast8_t ARG
         if (DEBUG_SEE) { cout << lua_color << "Scanning for ext.. "; }
         while (true) {
             index += 4;
-            uint_fast8_t C_CHECK = datamdx[index + 3][channel];
+            uint_fast8_t C_CHECK = uint_fast8_t(datamdx[index + 3][channel]);
             if (DEBUG_SEE) { cout << hex << int(C_CHECK) << " " << dec; }
             //if it's a new note command, or silence, or stop then don't
             if ((C_CHECK <= 96 || C_CHECK == 0xEE) || (C_CHECK == 0xF2 || C_CHECK == 0xFF)) { break; }
             //continue to scan
             if (C_CHECK == 0xF3) {
-                int exten = int(double(datamdx[index + 2][channel]) * divlen);
+                int exten = int(double(uint_fast8_t(datamdx[index + 2][channel])) * divlen);
                 duration += exten;
                 if (DEBUG_SEE) { cout << blue << "EXT +" << exten << lua_color << " "; }
             }
         }
         if (DEBUG_SEE) { cout << purple << notesD[CMD % 12] << "-" << int(CMD / 12) << " - " << int(ARG1) << " (" << duration << ")" << " V: " << int(ARG3) << white; }
-        midifile.addNoteOn(track, starttick, channel, CMD, ARG3);
+        midifile.addNoteOn(track, starttick, channel, CMD, min(127, int(ARG3) * 3));
         midifile.addNoteOff(track, starttick + duration, channel, CMD);
         starttick += duration;
     }
