@@ -30,7 +30,7 @@ using namespace smf;
 
 #define DEFAULT_DIVLEN 5.0
 #define DIVLEN_MULT (256.0 / DEFAULT_DIVLEN)
-bool DEBUG_SEE = true;
+bool DEBUG_SEE = false;
 bool didPlayNoteYet = false;
 double divlen = DEFAULT_DIVLEN;
 int starttick = 0;
@@ -219,7 +219,7 @@ BYTES = BY2 + (BY1 << 8); }
 
 //Main
 int main() {
-    cout << white << R"(mdx2mid v0.1 (https://github.com/johnfortnitekennedyG/mdx2mid)
+    cout << white << R"(mdx2mid v0.2 (https://github.com/johnfortnitekennedyG/mdx2mid)
 
 Convert mdx to midi, based off the original unMDX (https://github.com/metalgeardev/MGS1/blob/master/unMDX.rb)
 Write the filename/path and hit enter.
