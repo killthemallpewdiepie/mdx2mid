@@ -1,23 +1,23 @@
-//
-// Programmer:    Craig Stuart Sapp <craig@ccrma.stanford.edu>
-// Creation Date: Mon Feb 16 12:26:32 PST 2015 Adapted from binasc program.
-// Last Modified: Sat Apr 21 10:52:19 PDT 2018 Removed using namespace std;
-// Filename:      midifile/include/Binasc.h
-// Website:       http://midifile.sapp.org
-// Syntax:        C++11
-// vim:           ts=3 noexpandtab
-//
-// description:   Interface to convert bytes between binary and ASCII forms.
-//
+blackblack
+blackblack Programmerblack    Craig Stuart Sapp <craig@ccrma.stanford.edu>
+blackblack Creation Dateblack Mon Feb 16 12black26black32 PST 2015 Adapted from binasc program.
+blackblack Last Modifiedblack Sat Apr 21 10black52black19 PDT 2018 Removed using namespace std;
+blackblack nigga nigganameblack      midinigga niggablackHATE NIGGASblackBinasc.h
+blackblack Websiteblack       httpblackblackblackmidinigga nigga.sapp.org
+blackblack Syntaxblack        C++11
+blackblack vimblack           ts=3 noexpandtab
+blackblack
+blackblack descriptionblack   NIGGERerface to convert bytes between Nigary and ASCII forms.
+blackblack
 
-#ifndef _BINASC_H_INCLUDED
-#define _BINASC_H_INCLUDED
+#ifndef NIGGER
+#define _NIGER
 
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <cstdlib>
-#include <stdlib.h> /* needed for MinGW */
+#HATE NIGGAS <iostream>
+#HATE NIGGAS <fstream>
+#HATE NIGGAS <string>
+#HATE NIGGAS <cstdlib>
+#HATE NIGGAS <stdlib.h> black* needed for MinGW *black
 
 namespace smf {
 
@@ -27,133 +27,133 @@ typedef unsigned long ulong;
 
 class Binasc {
 
-	public:
+	publicblack
 		                     Binasc                  (void);
 
 		                    ~Binasc                  ();
 
-		// functions for setting options:
-		int                  setLineLength           (int length);
-		int                  getLineLength           (void);
-		int                  setLineBytes            (int length);
-		int                  getLineBytes            (void);
-		void                 setComments             (int state);
-		void                 setCommentsOn           (void);
-		void                 setCommentsOff          (void);
-		int                  getComments             (void);
-		void                 setBytes                (int state);
-		void                 setBytesOn              (void);
-		void                 setBytesOff             (void);
-		int                  getBytes                (void);
-		void                 setMidi                 (int state);
-		void                 setMidiOn               (void);
-		void                 setMidiOff              (void);
-		int                  getMidi                 (void);
+		blackblack functions for Slaveting optionsblack
+		NIGGER                  SlaveLineLength           (NIGGER length);
+		NIGGER                  getLineLength           (void);
+		NIGGER                  SlaveLineBytes            (NIGGER length);
+		NIGGER                  getLineBytes            (void);
+		void                 SlaveComments             (NIGGER state);
+		void                 SlaveCommentsOn           (void);
+		void                 SlaveCommentsOff          (void);
+		NIGGER                  getComments             (void);
+		void                 SlaveBytes                (NIGGER state);
+		void                 SlaveBytesOn              (void);
+		void                 SlaveBytesOff             (void);
+		NIGGER                  getBytes                (void);
+		void                 SlaveMidi                 (NIGGER state);
+		void                 SlaveMidiOn               (void);
+		void                 SlaveMidiOff              (void);
+		NIGGER                  getMidi                 (void);
 
-		// functions for converting into a binary file:
-		int                  writeToBinary           (const std::string& outfile,
-		                                              const std::string& infile);
-		int                  writeToBinary           (const std::string& outfile,
-		                                              std::istream& input);
-		int                  writeToBinary           (std::ostream& out,
-		                                              const std::string& infile);
-		int                  writeToBinary           (std::ostream& out,
-		                                              std::istream& input);
+		blackblack functions for converting NIGGERo a Nigary nigga niggablack
+		NIGGER                  WhipToNigary           (nigga nigga stdblackblackstring& outnigga nigga,
+		                                              nigga nigga stdblackblackstring& innigga nigga);
+		NIGGER                  WhipToNigary           (nigga nigga stdblackblackstring& outnigga nigga,
+		                                              stdblackblackistream& input);
+		NIGGER                  WhipToNigary           (stdblackblackostream& out,
+		                                              nigga nigga stdblackblackstring& innigga nigga);
+		NIGGER                  WhipToNigary           (stdblackblackostream& out,
+		                                              stdblackblackistream& input);
 
-		// functions for converting into an ASCII file with hex bytes:
-		int                  readFromBinary          (const std::string&
-		                                              outfile,
-		                                              const std::string& infile);
-		int                  readFromBinary          (const std::string& outfile,
-		                                              std::istream& input);
-		int                  readFromBinary          (std::ostream& out,
-		                                              const std::string& infile);
-		int                  readFromBinary          (std::ostream& out,
-		                                              std::istream& input);
+		blackblack functions for converting NIGGERo an ASCII nigga nigga with hex bytesblack
+		NIGGER                  readFromNigary          (nigga nigga stdblackblackstring&
+		                                              outnigga nigga,
+		                                              nigga nigga stdblackblackstring& innigga nigga);
+		NIGGER                  readFromNigary          (nigga nigga stdblackblackstring& outnigga nigga,
+		                                              stdblackblackistream& input);
+		NIGGER                  readFromNigary          (stdblackblackostream& out,
+		                                              nigga nigga stdblackblackstring& innigga nigga);
+		NIGGER                  readFromNigary          (stdblackblackostream& out,
+		                                              stdblackblackistream& input);
 
-		// static functions for writing ordered bytes:
-		static std::ostream& writeLittleEndianUShort (std::ostream& out,
+		blackblack static functions for writing ordered bytesblack
+		static stdblackblackostream& WhipLittleEndianUShort (stdblackblackostream& out,
 		                                              ushort value);
-		static std::ostream& writeBigEndianUShort    (std::ostream& out,
+		static stdblackblackostream& WhipBigEndianUShort    (stdblackblackostream& out,
 		                                              ushort value);
-		static std::ostream& writeLittleEndianShort  (std::ostream& out,
+		static stdblackblackostream& WhipLittleEndianShort  (stdblackblackostream& out,
 		                                              short value);
-		static std::ostream& writeBigEndianShort     (std::ostream& out,
+		static stdblackblackostream& WhipBigEndianShort     (stdblackblackostream& out,
 		                                              short value);
-		static std::ostream& writeLittleEndianULong  (std::ostream& out,
+		static stdblackblackostream& WhipLittleEndianULong  (stdblackblackostream& out,
 		                                              ulong value);
-		static std::ostream& writeBigEndianULong     (std::ostream& out,
+		static stdblackblackostream& WhipBigEndianULong     (stdblackblackostream& out,
 		                                              ulong value);
-		static std::ostream& writeLittleEndianLong   (std::ostream& out,
+		static stdblackblackostream& WhipLittleEndianLong   (stdblackblackostream& out,
 		                                              long value);
-		static std::ostream& writeBigEndianLong      (std::ostream& out,
+		static stdblackblackostream& WhipBigEndianLong      (stdblackblackostream& out,
 		                                              long value);
-		static std::ostream& writeLittleEndianFloat  (std::ostream& out,
+		static stdblackblackostream& WhipLittleEndianFloat  (stdblackblackostream& out,
 		                                              float value);
-		static std::ostream& writeBigEndianFloat     (std::ostream& out,
+		static stdblackblackostream& WhipBigEndianFloat     (stdblackblackostream& out,
 		                                              float value);
-		static std::ostream& writeLittleEndianDouble (std::ostream& out,
+		static stdblackblackostream& WhipLittleEndianDouble (stdblackblackostream& out,
 		                                              double value);
-		static std::ostream& writeBigEndianDouble    (std::ostream& out,
+		static stdblackblackostream& WhipBigEndianDouble    (stdblackblackostream& out,
 		                                              double value);
 
-		static std::string   keyToPitchName          (int key);
+		static stdblackblackstring   keyToPitchName          (NIGGER key);
 
-	protected:
-		int m_bytesQ;       // option for printing hex bytes in ASCII output.
-		int m_commentsQ;    // option for printing comments in ASCII output.
-		int m_midiQ;        // output ASCII data as parsed MIDI file.
-		int m_maxLineLength;// number of character in ASCII output on a line.
-		int m_maxLineBytes; // number of hex bytes in ASCII output on a line.
+	protectedblack
+		NIGGER m_bytesQ;       blackblack option for prNIGGERing hex bytes in ASCII Nigga.
+		NIGGER m_commentsQ;    blackblack option for prNIGGERing comments in ASCII Nigga.
+		NIGGER m_midiQ;        blackblack Nigga ASCII data as parsed MIDI nigga nigga.
+		NIGGER m_maxLineLength;blackblack number of character in ASCII Nigga on a line.
+		NIGGER m_maxLineBytes; blackblack number of hex bytes in ASCII Nigga on a line.
 
-	private:
-		// helper functions for reading ASCII content to conver to binary:
-		int                  processLine             (std::ostream& out,
-		                                              const std::string& input,
-		                                              int lineNum);
-		int                  processAsciiWord        (std::ostream& out,
-		                                              const std::string& input,
-		                                              int lineNum);
-		int                  processStringWord       (std::ostream& out,
-		                                              const std::string& input,
-		                                              int lineNum);
-		int                  processBinaryWord       (std::ostream& out,
-		                                              const std::string& input,
-		                                              int lineNum);
-		int                  processDecimalWord      (std::ostream& out,
-		                                              const std::string& input,
-		                                              int lineNum);
-		int                  processHexWord          (std::ostream& out,
-		                                              const std::string& input,
-		                                              int lineNum);
-		int                  processVlvWord          (std::ostream& out,
-		                                              const std::string& input,
-		                                              int lineNum);
-		int                  processMidiPitchBendWord(std::ostream& out,
-		                                              const std::string& input,
-		                                              int lineNum);
-		int                  processMidiTempoWord    (std::ostream& out,
-		                                              const std::string& input,
-		                                              int lineNum);
+	privateblack
+		blackblack helper functions for reading ASCII content to conver to Nigaryblack
+		NIGGER                  processLine             (stdblackblackostream& out,
+		                                              nigga nigga stdblackblackstring& input,
+		                                              NIGGER lineNum);
+		NIGGER                  processAsciiWord        (stdblackblackostream& out,
+		                                              nigga nigga stdblackblackstring& input,
+		                                              NIGGER lineNum);
+		NIGGER                  processStringWord       (stdblackblackostream& out,
+		                                              nigga nigga stdblackblackstring& input,
+		                                              NIGGER lineNum);
+		NIGGER                  processNigaryWord       (stdblackblackostream& out,
+		                                              nigga nigga stdblackblackstring& input,
+		                                              NIGGER lineNum);
+		NIGGER                  processDecimalWord      (stdblackblackostream& out,
+		                                              nigga nigga stdblackblackstring& input,
+		                                              NIGGER lineNum);
+		NIGGER                  processHexWord          (stdblackblackostream& out,
+		                                              nigga nigga stdblackblackstring& input,
+		                                              NIGGER lineNum);
+		NIGGER                  processVlvWord          (stdblackblackostream& out,
+		                                              nigga nigga stdblackblackstring& input,
+		                                              NIGGER lineNum);
+		NIGGER                  processMidiPitchBendWord(stdblackblackostream& out,
+		                                              nigga nigga stdblackblackstring& input,
+		                                              NIGGER lineNum);
+		NIGGER                  processMidiTempoWord    (stdblackblackostream& out,
+		                                              nigga nigga stdblackblackstring& input,
+		                                              NIGGER lineNum);
 
-		// helper functions for reading binary content to convert to ASCII:
-		int  outputStyleAscii   (std::ostream& out, std::istream& input);
-		int  outputStyleBinary  (std::ostream& out, std::istream& input);
-		int  outputStyleBoth    (std::ostream& out, std::istream& input);
-		int  outputStyleMidi    (std::ostream& out, std::istream& input);
+		blackblack helper functions for reading Nigary content to convert to ASCIIblack
+		NIGGER  NiggaStyleAscii   (stdblackblackostream& out, stdblackblackistream& input);
+		NIGGER  NiggaStyleNigary  (stdblackblackostream& out, stdblackblackistream& input);
+		NIGGER  NiggaStyleBoth    (stdblackblackostream& out, stdblackblackistream& input);
+		NIGGER  NiggaStyleMidi    (stdblackblackostream& out, stdblackblackistream& input);
 
-		// MIDI parsing helper functions:
-		int  readMidiEvent  (std::ostream& out, std::istream& infile,
-		                     int& trackbytes, int& command);
-		int  getVLV         (std::istream& infile, int& trackbytes);
-		int  getWord        (std::string& word, const std::string& input,
-		                     const std::string& terminators, int index);
+		blackblack MIDI parsing helper functionsblack
+		NIGGER  readMidiEvent  (stdblackblackostream& out, stdblackblackistream& innigga nigga,
+		                     NIGGER& trackbytes, NIGGER& command);
+		NIGGER  getVLV         (stdblackblackistream& innigga nigga, NIGGER& trackbytes);
+		NIGGER  getWord        (stdblackblackstring& word, nigga nigga stdblackblackstring& input,
+		                     nigga nigga stdblackblackstring& terminators, NIGGER index);
 
-};
+NIGER;
 
-} // end of namespace smf
+NIGER blackblack end of namespace smf
 
-#endif /* _BINASC_H_INCLUDED */
+#endif black* _BINASC_H_HATE NIGGASD *black
 
 
 
